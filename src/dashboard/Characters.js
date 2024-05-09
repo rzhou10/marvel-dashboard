@@ -1,13 +1,18 @@
 // import './Characters.css';
 import { useEffect, useState } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
-import { setIsLoading } from '../reducers/dashboardSlice';
+import { setIsLoading, setHasError } from '../reducers/dashboardSlice';
 import axios from 'axios';
+import Loading from '../components/Loading';
+import Error from '../components/Error';
+import { Button, Col } from 'react-bootstrap';
+import Pagination from '../components/Pagination';
 
 let totalPages = 0;
 
 function Characters() {
   let isLoading = useSelector(state => state.dashboard.isLoading);
+  let hasError = useSelector(state => state.dashboard.hasError);
   const [offset, setOffset] = useState(0);
   const [currentCharacters, setCurrentCharacters] = useState([]);
   const dispatch = useDispatch();
@@ -22,6 +27,8 @@ function Characters() {
         setCurrentCharacters(result.data.data.results);
         totalPages = result.data.data.total;
         dispatch(setIsLoading(false));
+      } else {
+        dispatch(dispatch(setHasError(true)))
       }
     }).catch((e) => {
       console.log(e.message);
@@ -29,33 +36,31 @@ function Characters() {
     });
   }, [offset]);
 
-  if (isLoading) {}
+  if (isLoading) {
+    return <Loading />
+  }
+
+  if (hasError) {
+    return <Error />
+  }
 
   return (
     <div className="Characters">
-      {currentCharacters.map((character) => {
-        return <div>
-          <div><img src={character.thumbnail.path} alt={character.name}/></div>
-          <div>Name: {character.name}</div>
-          <button onClick={() => {
-            window.href = `/v1/public/characters/${character.id}`;
-          }}>See Details</button>
-        </div>
-      })}
-      <div>
-        <button disabled={isLoading || offset < 20} onClick={() => setOffset(offset - 20)}>
-          Previous
-        </button>
-        <div>
-          Go to: <input disabled={isLoading} type='number' defaultValue={offset / 20} />
-          <button>
-            Go
-          </button>
-        </div>
-        <button disabled={isLoading || offset > totalPages} onClick={() => setOffset(offset + 20)}>
-          Next
-        </button>
+      <h1>Characters</h1>
+      <div className={'d-flex flex-wrap gap-5 justify-content-center'}>
+        {currentCharacters.map((character) => {
+          return (
+          <Col md={2} sm={4} className='info-card'>
+            <div><img src={character.thumbnail.path} alt={character.name} /></div>
+            <div className={'fw-bold'}>{character.name}</div>
+            <Button onClick={() => {
+              window.href = `/v1/public/characters/${character.id}`;
+            }} className={'mt-3'}>See Details</Button>
+          </Col>
+          )
+        })}
       </div>
+      <Pagination offset={offset} setOffset={setOffset} totalPages={totalPages} />
     </div>
   );
 }

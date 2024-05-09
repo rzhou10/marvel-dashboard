@@ -16,37 +16,12 @@ function Sidebar() {
         }}>
           Characters
         </button>
-        <button disabled={isLoading} className={`sidebar-button ${view === 'comics' ? 'highlight' : ''}`} onClick={() => {
+        <button disabled={isLoading} className={`sidebar-button ${view === 'saved' ? 'highlight' : ''}`} onClick={() => {
           // temporarily disable this button
           dispatch(setIsLoading(true));
-          dispatch(switchView('comics'));
+          dispatch(switchView('saved'));
         }}>
-          Comics
-        </button>
-        <button disabled={isLoading} className={`sidebar-button ${view === 'creators' ? 'highlight' : ''}`} onClick={() => {
-          // temporarily disable this button
-          dispatch(setIsLoading(true));
-          dispatch(switchView('creators'));
-        }}>
-          Creators
-        </button>
-        <button disabled={isLoading} className={`sidebar-button ${view === 'events' ? 'highlight' : ''}`} onClick={() => {
-          dispatch(setIsLoading(true));
-          dispatch(switchView('events'));
-        }}>
-          Events
-        </button>
-        <button disabled={isLoading} className={`sidebar-button ${view === 'series' ? 'highlight' : ''}`} onClick={() => {
-          dispatch(setIsLoading(true));
-          dispatch(switchView('series'));
-        }}>
-          Series
-        </button>
-        <button disabled={isLoading} className={`sidebar-button ${view === 'stories' ? 'highlight' : ''}`} onClick={() => {
-          dispatch(setIsLoading(true));
-          dispatch(switchView('stories'));
-        }}>
-          Stories
+          Saved Characters
         </button>
       </div>
     </div>
