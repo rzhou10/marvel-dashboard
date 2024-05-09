@@ -5,23 +5,27 @@ export const dashboardSlice = createSlice({
   initialState: {
     view: '',
     isLoading: false,
-    hasError: false
+    hasError: false,
+    currentId: 0
   },
   reducers: {
     switchView: (state, action) => {
-      state.view = action.payload
+      state.view = action.payload;
     },
     setIsLoading: (state, action) => {
-      state.isLoading = action.payload
+      state.isLoading = action.payload;
     },
     setHasError: (state, action) => {
-      state.isLoading = action.payload
+      state.isLoading = action.payload;
+    },
+    setCurrentId: (state, action) => {
+      state.currentId = action.payload;
     }
   }
 })
 
 // export all of the individual functions
-export const { switchView, setIsLoading, setHasError } = dashboardSlice.actions;
+export const { switchView, setIsLoading, setHasError, setCurrentId } = dashboardSlice.actions;
 
 // export reducer
 export default dashboardSlice.reducer

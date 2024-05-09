@@ -3,13 +3,16 @@ import './css/DashboardComponent.css';
 import Sidebar from './SideBar';
 import Characters from './dashboard/Characters';
 import { useSelector } from 'react-redux';
+import CharacterPage from './individualPages/CharacterPage';
+import SavedCharacters from './dashboard/SavedCharacters';
+
 
 const renderDashboard = (view) => {
   switch (view) {
     case 'characters':
       return <Characters />
     case 'saved':
-      return < ></>
+      return <SavedCharacters />
     default:
       return <Characters />
   }
@@ -20,8 +23,8 @@ function App() {
 
   return (
     <div className="App">
-      <Sidebar />
-      {renderDashboard(view)}
+        <Sidebar />
+        {renderDashboard(view)}
     </div>
   );
 }

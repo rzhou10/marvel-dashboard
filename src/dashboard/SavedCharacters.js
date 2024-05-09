@@ -10,7 +10,7 @@ import CharacterCard from '../components/CharacterCard';
 
 let totalPages = 0;
 
-function Characters() {
+function SavedCharacters() {
   let isLoading = useSelector(state => state.dashboard.isLoading);
   let hasError = useSelector(state => state.dashboard.hasError);
   const [offset, setOffset] = useState(0);
@@ -19,22 +19,23 @@ function Characters() {
 
   useEffect(() => {
     dispatch(setIsLoading(true));
-    axios({
-      url: `https://gateway.marvel.com:443/v1/public/characters?offset=${offset}&apikey=${process.env.REACT_APP_PUBLIC_KEY}`,
-      method: 'GET'
-    }).then((result) => {
-      if (result.data.code === 200) {
-        setCurrentCharacters(result.data.data.results);
-        totalPages = result.data.data.total;
-        dispatch(setIsLoading(false));
-      } else {
-        dispatch(dispatch(setHasError(true)));
-      }
-    }).catch((e) => {
-      console.log(e.message);
-      dispatch(setIsLoading(false));
-      dispatch(dispatch(setHasError(true)));
-    });
+    // axios({
+    //   url: `https://gateway.marvel.com:443/v1/public/characters?offset=${offset}&apikey=${process.env.REACT_APP_PUBLIC_KEY}`,
+    //   method: 'GET'
+    // }).then((result) => {
+    //   if (result.data.code === 200) {
+    //     setCurrentCharacters(result.data.data.results);
+    //     totalPages = result.data.data.total;
+    //     dispatch(setIsLoading(false));
+    //   } else {
+    //     dispatch(dispatch(setHasError(true)));
+    //   }
+    // }).catch((e) => {
+    //   console.log(e.message);
+    //   dispatch(setIsLoading(false));
+    //   dispatch(dispatch(setHasError(true)));
+    // });
+    dispatch(setIsLoading(false));
   }, [offset]);
 
   if (isLoading) {
@@ -47,7 +48,7 @@ function Characters() {
 
   return (
     <div className="Characters">
-      <h1>Characters</h1>
+      <h1>Saved Characters</h1>
       <div className={'d-flex flex-wrap gap-5 justify-content-center'}>
         {currentCharacters.map((character, index) => {
           return (
@@ -60,4 +61,4 @@ function Characters() {
   );
 }
 
-export default Characters;
+export default SavedCharacters;
