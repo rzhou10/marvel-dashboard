@@ -7,6 +7,7 @@ import Loading from '../components/Loading';
 import Error from '../components/Error';
 import Pagination from '../components/Pagination';
 import CharacterCard from '../components/CharacterCard';
+import { Button } from 'react-bootstrap';
 
 let totalPages = 0;
 
@@ -26,7 +27,10 @@ function Characters() {
       if (result.data.code === 200) {
         setCurrentCharacters(result.data.data.results);
         totalPages = result.data.data.total;
-        dispatch(setIsLoading(false));
+        // add timeout to allow state to propogate properly
+        setTimeout(() => {
+          dispatch(setIsLoading(false));
+        }, 1000);
       } else {
         dispatch(dispatch(setHasError(true)));
       }
@@ -51,11 +55,16 @@ function Characters() {
       <div className={'d-flex flex-wrap gap-5 justify-content-center'}>
         {currentCharacters.map((character, index) => {
           return (
-            <CharacterCard name={character.name} image={`${character.thumbnail.path}.${character.thumbnail.extension}`} id={character.id} index={index} />
+            <CharacterCard name={character.name} image={`${character.thumbnail.path}.${character.thumbnail.extension}`} id={character.id} key={index} />
           )
         })}
       </div>
       <Pagination offset={offset} setOffset={setOffset} totalPages={totalPages} />
+      <div className={'position-absolute'}>
+        <Button>
+          Save
+        </Button>
+      </div>
     </div>
   );
 }

@@ -13,6 +13,8 @@ const renderDashboard = (view) => {
       return <Characters />
     case 'saved':
       return <SavedCharacters />
+      case 'characterPage':
+        return <CharacterPage />
     default:
       return <Characters />
   }
