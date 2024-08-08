@@ -1,7 +1,9 @@
-
 import { Button, Form } from 'react-bootstrap';
 import { useSelector } from 'react-redux';
 
+/******************************************************
+  Controls pagination for the character select screen
+*******************************************************/
 const Pagination = ({ offset, setOffset, totalPages }) => {
   let isLoading = useSelector(state => state.dashboard.isLoading);
   return (
@@ -10,6 +12,7 @@ const Pagination = ({ offset, setOffset, totalPages }) => {
         Previous
       </Button>
       <div className={'d-flex mx-4 justify-content-center'}>
+        {/* Go to specific page */}
         <span style={{ whiteSpace: 'nowrap', lineHeight: '2.5' }}>Go to:&nbsp;&nbsp;</span>
         <Form.Control className={'w-25'} id='page-input' disabled={isLoading} type='number' defaultValue={offset / 20} />
         &nbsp;

@@ -10,6 +10,9 @@ import CharacterCard from '../components/CharacterCard';
 
 let totalPages = 0;
 
+/************************************************
+  Main dashboard to see all characters saved
+*************************************************/
 function SavedCharacters() {
   let isLoading = useSelector(state => state.dashboard.isLoading);
   let hasError = useSelector(state => state.dashboard.hasError);

@@ -11,6 +11,9 @@ import { Button } from 'react-bootstrap';
 
 let totalPages = 0;
 
+/************************************************
+  Main dashboard to see all characters to select
+*************************************************/
 function Characters() {
   let isLoading = useSelector(state => state.dashboard.isLoading);
   let hasError = useSelector(state => state.dashboard.hasError);
@@ -32,12 +35,12 @@ function Characters() {
           dispatch(setIsLoading(false));
         }, 1000);
       } else {
-        dispatch(dispatch(setHasError(true)));
+        dispatch(setHasError(true));
       }
     }).catch((e) => {
       console.log(e.message);
       dispatch(setIsLoading(false));
-      dispatch(dispatch(setHasError(true)));
+      dispatch(setHasError(true));
     });
   }, [offset]);
 

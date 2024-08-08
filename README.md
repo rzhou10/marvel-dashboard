@@ -1,26 +1,10 @@
 # Marvel API web app
 
-A web app utilizing Marvel's API to list characters, creators, comic series, etc.
+A web app utilizing Marvel's API to list characters and save characters to a MySQL database that can be found [here](https://github.com/rzhou10/marvel-dashboard-backend).
 
-### `npm start`
+To get your own API keys, head to [Marvel's developer site](https://developer.marvel.com/) and click on "Get Started". Follow the instructions as you sign up
+for an account with Marvel.
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+Install all dependencies with `npm i` and start the app with `npm start`. Visit [http://localhost:3000](http://localhost:3000) to view the web app.
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
-
-### `npm test`
-
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
-
-### `npm run build`
-
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
-
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
-
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+`npm run build` Creates a build folder so it's ready for deployment

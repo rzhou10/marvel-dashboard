@@ -4,7 +4,13 @@ import { useSelector, useDispatch } from 'react-redux';
 import { setCurrentId, switchView, setSelectedCharacters } from '../reducers/dashboardSlice';
 import { useState } from 'react';
 
-function CharacterCard({ name, image, id }) {
+/**************************************************************
+  Card to display character information (returned from the API)
+***************************************************************/
+export default function CharacterCard({ name, image, id }) {
+  // view state controls if the user is looking at the saved character page, or the select character
+  // if the character is saved, then we just need to go to the specific character page
+  // otherwise this logic controls if the character is ready to be selected for saving or not
   const view = useSelector(state => state.dashboard.view);
   const selectedCharacters = useSelector(state => state.dashboard.selectedCharacters);
   const dispatch = useDispatch();
@@ -34,5 +40,3 @@ function CharacterCard({ name, image, id }) {
     </Col>
   )
 }
-
-export default CharacterCard;

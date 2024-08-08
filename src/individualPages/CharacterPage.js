@@ -7,6 +7,9 @@ import Loading from '../components/Loading';
 import Error from '../components/Error';
 import axios from 'axios';
 
+/************************************************
+  Detailed view of the character you selected
+*************************************************/
 const CharacterPage = () => {
   let isLoading = useSelector(state => state.dashboard.isLoading);
   let hasError = useSelector(state => state.dashboard.hasError);
