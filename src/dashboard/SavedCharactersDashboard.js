@@ -13,7 +13,7 @@ let totalPages = 0;
 /************************************************
   Main dashboard to see all characters saved
 *************************************************/
-function SavedCharacters() {
+export function SavedCharactersDashboard () {
   let isLoading = useSelector(state => state.dashboard.isLoading);
   let hasError = useSelector(state => state.dashboard.hasError);
   const [offset, setOffset] = useState(0);
@@ -22,22 +22,22 @@ function SavedCharacters() {
 
   useEffect(() => {
     dispatch(setIsLoading(true));
-    // axios({
-    //   url: `https://gateway.marvel.com:443/v1/public/characters?offset=${offset}&apikey=${process.env.REACT_APP_PUBLIC_KEY}`,
-    //   method: 'GET'
-    // }).then((result) => {
-    //   if (result.data.code === 200) {
-    //     setCurrentCharacters(result.data.data.results);
-    //     totalPages = result.data.data.total;
-    //     dispatch(setIsLoading(false));
-    //   } else {
-    //     dispatch(dispatch(setHasError(true)));
-    //   }
-    // }).catch((e) => {
-    //   console.log(e.message);
-    //   dispatch(setIsLoading(false));
-    //   dispatch(dispatch(setHasError(true)));
-    // });
+    axios({
+      url: `${process.env.REACT_APP_BACKEND_URL}/characters`,
+      method: 'GET'
+    }).then((result) => {
+      if (result.data.code === 200) {
+        setCurrentCharacters(result.data);
+        totalPages = 10;
+        dispatch(setIsLoading(false));
+      } else {
+        dispatch(dispatch(setHasError(true)));
+      }
+    }).catch((e) => {
+      console.log(e.message);
+      dispatch(setIsLoading(false));
+      dispatch(dispatch(setHasError(true)));
+    });
     dispatch(setIsLoading(false));
   }, [offset]);
 
@@ -55,7 +55,7 @@ function SavedCharacters() {
       <div className={'d-flex flex-wrap gap-5 justify-content-center'}>
         {currentCharacters.map((character, index) => {
           return (
-            <CharacterCard name={character.name} image={`${character.thumbnail.path}.${character.thumbnail.extension}`} id={character.id} index={index} />
+            <CharacterCard name={character.charName} image={`${character.image}`} id={character.id} index={index} />
           )
         })}
       </div>

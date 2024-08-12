@@ -11,14 +11,15 @@ import { Button } from 'react-bootstrap';
 
 let totalPages = 0;
 
-/************************************************
-  Main dashboard to see all characters to select
-*************************************************/
-function Characters() {
+/***********************************************************
+  Main dashboard to see all characters available to select
+************************************************************/
+export default function SelectCharacterDashboard() {
   let isLoading = useSelector(state => state.dashboard.isLoading);
   let hasError = useSelector(state => state.dashboard.hasError);
   const [offset, setOffset] = useState(0);
   const [currentCharacters, setCurrentCharacters] = useState([]);
+  const selectedCharacters = useSelector(state => state.dashboard.selectedCharacters);
   const dispatch = useDispatch();
 
   useEffect(() => {
@@ -44,6 +45,22 @@ function Characters() {
     });
   }, [offset]);
 
+  const saveCharacters = () => {
+    axios({
+      url: `${process.env.REACT_APP_BACKEND_URL}/save-character`,
+      method: 'GET',
+      data: selectedCharacters
+    }).then(res => {
+      if (res.status === 200) {
+        // show some message on success
+        console.log('success');
+      } else {
+        // show some message on error
+        console.log('error: ', );
+      }
+    })
+  }
+
   if (isLoading) {
     return <Loading />
   }
@@ -64,12 +81,10 @@ function Characters() {
       </div>
       <Pagination offset={offset} setOffset={setOffset} totalPages={totalPages} />
       <div className={'position-absolute'}>
-        <Button>
+        <Button onClick={saveCharacters()}>
           Save
         </Button>
       </div>
     </div>
   );
 }
-
-export default Characters;

@@ -1,22 +1,22 @@
 import './App.css';
 import './css/DashboardComponent.css';
 import Sidebar from './SideBar';
-import Characters from './dashboard/Characters';
+import SelectCharacterDashboard from './dashboard/SelectCharacterDashboard';
 import { useSelector } from 'react-redux';
 import CharacterPage from './individualPages/CharacterPage';
-import SavedCharacters from './dashboard/SavedCharacters';
+import SavedCharactersDashboard from './dashboard/SavedCharactersDashboard';
 
 
 const renderDashboard = (view) => {
   switch (view) {
     case 'characters':
-      return <Characters />
+      return <SelectCharacterDashboard />
     case 'saved':
-      return <SavedCharacters />
+      return <SavedCharactersDashboard />
       case 'characterPage':
         return <CharacterPage />
     default:
-      return <Characters />
+      return <SelectCharacterDashboard />
   }
 }
 
